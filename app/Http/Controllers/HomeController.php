@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use App\Models\Category;
+use App\Models\Startup;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.home');
+        $about=About::first();
+        $categories=Category::orderBy('created_at','asc')->get();
+        $startups=Startup::orderBy('created_at','asc')->get();
+        return view('front.home',compact('about','categories','startups'));
     }
 }
